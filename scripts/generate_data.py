@@ -545,7 +545,7 @@ def generate_commission_results(
                 else:
                     rate = Decimal("0.04")
 
-                commission = (revenue * rate).quantize(Decimal("0.01"))
+                commission = (revenue * rate).quantize(Decimal("0.01"),rounding=ROUND_HALF_UP)
                 status = rng.choices(
                     COMMISSION_STATUSES,
                     weights=COMMISSION_STATUS_WEIGHTS,
@@ -560,7 +560,7 @@ def generate_commission_results(
                     money(revenue),
                     money(target),
                     money(attainment),
-                    money(rate),
+                    f"{rate:.4f}",
                     money(commission),
                     status,
                 ])
